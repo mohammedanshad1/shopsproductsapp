@@ -8,6 +8,7 @@ class CategoryProductViewModel extends ChangeNotifier {
   List<Category> _categories = [];
   List<Products> _products = [];
   bool _isLoading = false;
+  List<Products> filteredProducts = [];
 
   List<Category> get categories => _categories;
   List<Products> get products => _products;
@@ -25,8 +26,7 @@ class CategoryProductViewModel extends ChangeNotifier {
         _categories =
             categoryJson.map((json) => Category.fromJson(json)).toList();
       } else {
-        print(
-            'Error: Failed to load categories - Status Code: ${response.statusCode}');
+        print('Error: Failed to load categories - Status Code: ${response.statusCode}');
         throw Exception('Failed to load categories');
       }
     } catch (e) {
@@ -47,10 +47,9 @@ class CategoryProductViewModel extends ChangeNotifier {
       if (response.statusCode == 200) {
         final List<dynamic> productJson = json.decode(response.body);
         _products = productJson.map((json) => Products.fromJson(json)).toList();
+        filteredProducts = _products;  // Initially show all products
       } else {
-        print(
-            'Error: Failed to load products - Status Code: ${response.statusCode}');
-        print('Response body: ${response.body}');
+        print('Error: Failed to load products - Status Code: ${response.statusCode}');
         throw Exception('Failed to load products');
       }
     } catch (e) {
@@ -59,5 +58,17 @@ class CategoryProductViewModel extends ChangeNotifier {
       _isLoading = false;
       notifyListeners();
     }
+  }
+
+  // Filter products based on the selected category
+  void filterProductsByCategory(int? categoryId) {
+    if (categoryId == null) {
+      filteredProducts = _products;  // Show all products when "All" is selected
+    } else {
+      filteredProducts = _products.where((product) {
+        return product.partsCat == categoryId; // Assuming partsCat is the part category ID
+      }).toList();
+    }
+    notifyListeners();
   }
 }

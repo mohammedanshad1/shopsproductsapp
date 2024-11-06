@@ -6,18 +6,18 @@ class ProductDetailScreen extends StatelessWidget {
   final Products product;
 
   // Constructor to receive the product
-  ProductDetailScreen({required this.product});
+  const ProductDetailScreen({required this.product});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Product Details", style: AppTypography.outfitBold),
+        title: const Text("Product Details", style: AppTypography.outfitBold),
        
         
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -37,31 +37,31 @@ class ProductDetailScreen extends StatelessWidget {
                 },
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Text(
               product.partsName ?? 'No Name',
               style: AppTypography.outfitBold.copyWith(fontSize: 24),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(
               '\$${product.price}',
               style: AppTypography.outfitRegular
                   .copyWith(fontSize: 18, color: Colors.green),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(
               'Rating: ${product.productRating}',
               style: AppTypography.outfitLight
                   .copyWith(fontSize: 16, color: Colors.grey[600]),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
 
             Text(
               'Offer: ${product.offerPrice}',
               style: AppTypography.outfitLight
                   .copyWith(fontSize: 16, color: Colors.grey[600]),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             if (product.description != null)
               Text(
                 'Description: ${product.description}',
