@@ -5,7 +5,6 @@ import 'package:shopsproductsapp/constants/app_typography.dart';
 class ProductDetailScreen extends StatelessWidget {
   final Products product;
 
-  // Constructor to receive the product
   const ProductDetailScreen({required this.product});
 
   @override

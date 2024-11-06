@@ -18,7 +18,6 @@ class LoginPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                // Login card
                 Card(
                   elevation: 8,
                   shape: RoundedRectangleBorder(
@@ -36,7 +35,6 @@ class LoginPage extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 20),
-                        // Username input field
                         TextField(
                           controller: _usernameController,
                           decoration: const InputDecoration(
@@ -45,7 +43,6 @@ class LoginPage extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 20),
-                        // Password input field
                         TextField(
                           controller: _passwordController,
                           obscureText: true,
@@ -55,7 +52,6 @@ class LoginPage extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 20),
-                        // Login button
                         viewModel.isLoading
                             ? const CircularProgressIndicator()
                             : CustomButton(

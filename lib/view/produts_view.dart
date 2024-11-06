@@ -70,13 +70,13 @@ class Product_View extends StatelessWidget {
                             viewModel.products.length,
                         onSelected: (isSelected) {
                           viewModel.filterProductsByCategory(
-                              null); // Show all products
+                              null); 
                         },
                       ),
                     );
                   } else {
                     final Category category =
-                        viewModel.categories[index - 1]; // Offset by 1
+                        viewModel.categories[index - 1]; 
                     return Padding(
                       padding: EdgeInsets.all(context.responsive.wp(2)),
                       child: ChoiceChip(
@@ -98,7 +98,6 @@ class Product_View extends StatelessWidget {
                 },
               ),
             ),
-            // Products grid
             Expanded(
               child: GridView.builder(
                 padding: EdgeInsets.all(context.responsive.wp(2)),

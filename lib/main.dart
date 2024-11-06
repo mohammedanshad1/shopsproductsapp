@@ -8,7 +8,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // Initialize SharedPreferences before the app starts
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String? userEmail = prefs.getString('userEmail');
 
@@ -34,7 +33,6 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Product App',
       theme: ThemeData(primarySwatch: Colors.blue),
-      // If the user is logged in, show Product_View. Otherwise, show LoginPage
       home: userEmail != null ? Product_View() : LoginPage(),
     );
   }

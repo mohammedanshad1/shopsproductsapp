@@ -47,7 +47,7 @@ class CategoryProductViewModel extends ChangeNotifier {
       if (response.statusCode == 200) {
         final List<dynamic> productJson = json.decode(response.body);
         _products = productJson.map((json) => Products.fromJson(json)).toList();
-        filteredProducts = _products;  // Initially show all products
+        filteredProducts = _products;  
       } else {
         print('Error: Failed to load products - Status Code: ${response.statusCode}');
         throw Exception('Failed to load products');
@@ -60,13 +60,12 @@ class CategoryProductViewModel extends ChangeNotifier {
     }
   }
 
-  // Filter products based on the selected category
   void filterProductsByCategory(int? categoryId) {
     if (categoryId == null) {
-      filteredProducts = _products;  // Show all products when "All" is selected
+      filteredProducts = _products;  
     } else {
       filteredProducts = _products.where((product) {
-        return product.partsCat == categoryId; // Assuming partsCat is the part category ID
+        return product.partsCat == categoryId; 
       }).toList();
     }
     notifyListeners();

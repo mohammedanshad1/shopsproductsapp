@@ -45,7 +45,6 @@ class _ProfilePageState extends State<ProfilePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Circle Avatar for Profile Image
             const CircleAvatar(
               radius: 60,
               backgroundImage: AssetImage('assets/icons/profile.png'),
@@ -65,14 +64,12 @@ class _ProfilePageState extends State<ProfilePage> {
                       style: AppTypography.outfitMedium
                           .copyWith(fontSize: responsive.sp(16))),
                   onTap: () {
-                    // Navigator.pushNamed(context, '/settings');
                   },
                 ),
               ),
             ),
             SizedBox(height: responsive.hp(5)),
 
-            // Settings Card
             Card(
               elevation: 5,
               shape: RoundedRectangleBorder(
@@ -84,13 +81,11 @@ class _ProfilePageState extends State<ProfilePage> {
                     style: AppTypography.outfitMedium
                         .copyWith(fontSize: responsive.sp(16))),
                 onTap: () {
-                  //  Navigator.pushNamed(context, '/settings');
                 },
               ),
             ),
             SizedBox(height: responsive.hp(5)),
 
-            // Logout Button with smaller size
             ElevatedButton(
               onPressed: _logout,
               child: Text('Logout',
@@ -99,7 +94,7 @@ class _ProfilePageState extends State<ProfilePage> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.red,
                 minimumSize: Size(responsive.wp(60),
-                    responsive.hp(5)), // Smaller width and height
+                    responsive.hp(5)),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
