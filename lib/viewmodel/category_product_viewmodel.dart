@@ -1,0 +1,65 @@
+import 'dart:convert';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:shopsproductsapp/model/category_model.dart';
+import 'package:shopsproductsapp/model/product_model.dart';
+
+class CategoryProductViewModel extends ChangeNotifier {
+  List<Category> _categories = [];
+  List<Products> _products = [];
+  bool _isLoading = false;
+
+  List<Category> get categories => _categories;
+  List<Products> get products => _products;
+  bool get isLoading => _isLoading;
+
+  // Fetch categories from API
+  Future<void> fetchCategories() async {
+    final url = 'https://prethewram.pythonanywhere.com/api/Top_categories/';
+    _isLoading = true;
+    notifyListeners();
+
+    try {
+      final response = await http.get(Uri.parse(url));
+      if (response.statusCode == 200) {
+        final List<dynamic> categoryJson = json.decode(response.body);
+        _categories =
+            categoryJson.map((json) => Category.fromJson(json)).toList();
+      } else {
+        print(
+            'Error: Failed to load categories - Status Code: ${response.statusCode}');
+        throw Exception('Failed to load categories');
+      }
+    } catch (e) {
+      print('Error fetching categories: $e');
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  // Fetch products from API
+  Future<void> fetchProducts() async {
+    final url = 'https://prethewram.pythonanywhere.com/api/parts_categories';
+    _isLoading = true;
+    notifyListeners();
+
+    try {
+      final response = await http.get(Uri.parse(url));
+      if (response.statusCode == 200) {
+        final List<dynamic> productJson = json.decode(response.body);
+        _products = productJson.map((json) => Products.fromJson(json)).toList();
+      } else {
+        print(
+            'Error: Failed to load products - Status Code: ${response.statusCode}');
+        print('Response body: ${response.body}');
+        throw Exception('Failed to load products');
+      }
+    } catch (e) {
+      print('Error fetching products: $e');
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+}
