@@ -21,7 +21,7 @@ class LoginViewModel with ChangeNotifier {
     final url = Uri.parse('https://api.escuelajs.co/api/v1/auth/login');
     final response = await http.post(
       url,
-      body: {'email': email, 'password': password}, // Corrected here
+      body: {'email': email, 'password': password}, 
     );
     print(response.body);
     _isLoading = false;

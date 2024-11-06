@@ -15,17 +15,15 @@ class HomeScreen extends StatelessWidget {
     final viewModel =
         Provider.of<CategoryProductViewModel>(context, listen: false);
 
-    // Fetch data when the screen loads
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await viewModel.fetchCategories();
       await viewModel.fetchProducts();
-      // After the data is fetched, show the custom snackbar
       CustomSnackBar.show(
         context,
         snackBarType:
-            SnackBarType.success, // You can define this in your snackbar
+            SnackBarType.success, 
         label: 'Data fetched successfully!',
-        bgColor: Colors.green, // Customize the background color
+        bgColor: Colors.green, 
       );
     });
 
@@ -36,7 +34,6 @@ class HomeScreen extends StatelessWidget {
             IconButton(
               icon: Icon(Icons.person, color: Colors.black),
               onPressed: () {
-                // Handle favorite action
               },
             ),
           ]),
@@ -48,9 +45,8 @@ class HomeScreen extends StatelessWidget {
 
           return Column(
             children: [
-              // Categories list
               Container(
-                height: context.responsive.hp(10), // Responsive height
+                height: context.responsive.hp(10), 
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: viewModel.categories.length,
@@ -58,7 +54,7 @@ class HomeScreen extends StatelessWidget {
                     final Category category = viewModel.categories[index];
                     return Padding(
                       padding: EdgeInsets.all(
-                          context.responsive.wp(2)), // Responsive padding
+                          context.responsive.wp(2)), 
                       child: Chip(
                         label: Text(
                           category.catName,
@@ -75,11 +71,11 @@ class HomeScreen extends StatelessWidget {
               Expanded(
                 child: GridView.builder(
                   padding: EdgeInsets.all(
-                      context.responsive.wp(2)), // Responsive padding
+                      context.responsive.wp(2)), 
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: context.responsive.width > 600
                         ? 3
-                        : 2, // Adjust columns for tablets
+                        : 2, 
                     crossAxisSpacing: context.responsive.wp(2),
                     mainAxisSpacing: context.responsive.hp(2),
                     childAspectRatio: 3 / 4,
@@ -89,12 +85,11 @@ class HomeScreen extends StatelessWidget {
                     final Products product = viewModel.products[index];
                     return GestureDetector(
                       onTap: () {
-                        // Navigate to the product detail screen on tap
                         Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) => ProductDetailScreen(
-                              product: product, // Pass product to detail screen
+                              product: product, 
                             ),
                           ),
                         );
@@ -109,7 +104,6 @@ class HomeScreen extends StatelessWidget {
                                 product.partImage,
                                 fit: BoxFit.cover,
                                 errorBuilder: (context, error, stackTrace) {
-                                  // Display the asset image if the network image fails to load
                                   return Image.asset(
                                     'assets/icons/pngtree-no-image-available-icon-flatvector-illustration-pic-design-profile-vector-png-image_40966566.jpg',
                                     fit: BoxFit.fitHeight,

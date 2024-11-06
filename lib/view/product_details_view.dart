@@ -21,7 +21,6 @@ class ProductDetailScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Product image
             Center(
               child: Image.network(
                 product.partImage,
@@ -39,20 +38,17 @@ class ProductDetailScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: 20),
-            // Product Name
             Text(
               product.partsName ?? 'No Name',
               style: AppTypography.outfitBold.copyWith(fontSize: 24),
             ),
             SizedBox(height: 10),
-            // Product Price
             Text(
               '\$${product.price}',
               style: AppTypography.outfitRegular
                   .copyWith(fontSize: 18, color: Colors.green),
             ),
             SizedBox(height: 10),
-            // Product Rating
             Text(
               'Rating: ${product.productRating}',
               style: AppTypography.outfitLight
@@ -66,13 +62,11 @@ class ProductDetailScreen extends StatelessWidget {
                   .copyWith(fontSize: 16, color: Colors.grey[600]),
             ),
             SizedBox(height: 20),
-            // Product Description (if any)
             if (product.description != null)
               Text(
                 'Description: ${product.description}',
                 style: AppTypography.outfitRegular.copyWith(fontSize: 16),
               ),
-            // You can add more product details here, like product features, specifications, etc.
           ],
         ),
       ),

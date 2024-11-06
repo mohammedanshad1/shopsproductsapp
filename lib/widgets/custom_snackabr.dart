@@ -12,7 +12,7 @@ class CustomSnackBar {
       context,
       snackBarType: snackBarType,
       label: label,
-      backgroundColor: bgColor ?? Colors.green, // Default to blue if not provided
+      backgroundColor: bgColor ?? Colors.green,
     );
   }
 }
