@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icon_snackbar/flutter_icon_snackbar.dart';
 import 'package:provider/provider.dart';
 import 'package:shopsproductsapp/constants/app_typography.dart';
 import 'package:shopsproductsapp/model/category_model.dart';
 import 'package:shopsproductsapp/model/product_model.dart';
 import 'package:shopsproductsapp/utils/responsive.dart';
+import 'package:shopsproductsapp/view/product_details_view.dart';
 import 'package:shopsproductsapp/viewmodel/category_product_viewmodel.dart';
+import 'package:shopsproductsapp/widgets/custom_snackabr.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -13,15 +16,30 @@ class HomeScreen extends StatelessWidget {
         Provider.of<CategoryProductViewModel>(context, listen: false);
 
     // Fetch data when the screen loads
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      viewModel.fetchCategories();
-      viewModel.fetchProducts();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await viewModel.fetchCategories();
+      await viewModel.fetchProducts();
+      // After the data is fetched, show the custom snackbar
+      CustomSnackBar.show(
+        context,
+        snackBarType:
+            SnackBarType.success, // You can define this in your snackbar
+        label: 'Data fetched successfully!',
+        bgColor: Colors.green, // Customize the background color
+      );
     });
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Home Screen", style: AppTypography.outfitBold),
-      ),
+          title: Text("Home Screen", style: AppTypography.outfitBold),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.person, color: Colors.black),
+              onPressed: () {
+                // Handle favorite action
+              },
+            ),
+          ]),
       body: Consumer<CategoryProductViewModel>(
         builder: (context, viewModel, child) {
           if (viewModel.isLoading) {
@@ -71,7 +89,15 @@ class HomeScreen extends StatelessWidget {
                     final Products product = viewModel.products[index];
                     return GestureDetector(
                       onTap: () {
-                        // Handle product tap for details
+                        // Navigate to the product detail screen on tap
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ProductDetailScreen(
+                              product: product, // Pass product to detail screen
+                            ),
+                          ),
+                        );
                       },
                       child: Card(
                         elevation: 4,

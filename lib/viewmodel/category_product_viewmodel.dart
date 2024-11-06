@@ -15,7 +15,7 @@ class CategoryProductViewModel extends ChangeNotifier {
 
   // Fetch categories from API
   Future<void> fetchCategories() async {
-    final url = 'https://prethewram.pythonanywhere.com/api/Top_categories/';
+    const url = 'https://prethewram.pythonanywhere.com/api/Top_categories/';
     _isLoading = true;
     notifyListeners();
 
@@ -40,7 +40,7 @@ class CategoryProductViewModel extends ChangeNotifier {
 
   // Fetch products from API
   Future<void> fetchProducts() async {
-    final url = 'https://prethewram.pythonanywhere.com/api/parts_categories';
+    const url = 'https://prethewram.pythonanywhere.com/api/parts_categories';
     _isLoading = true;
     notifyListeners();
 
